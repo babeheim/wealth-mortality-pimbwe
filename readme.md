@@ -1,7 +1,7 @@
-wealth-survival
+wealth-mortality-pimbwe
 ============
 
-Analysis script for "Understanding the nature of wealth and its effects on human fitness", by Monique Borgerhoff Mulder and Bret Beheim, in Philosophical Transactions of the Royal Society B, Volume 366, pp. 344-356
+Data and analysis scripts for "Understanding the nature of wealth and its effects on human fitness", by Monique Borgerhoff Mulder and Bret Beheim, in Philosophical Transactions of the Royal Society B (2011), Volume 366, pp. 344-356
 DOI: http://dx.doi.org/10.1098/rstb.2010.0231
 
 Requirements:
@@ -14,10 +14,10 @@ Instructions:
 In R, set the working directory to that containing this readme file. For example, on a Mac or Linux machine, you might say
 
 ```
-    setwd('~/Desktop/wealth-survival')
+    setwd('~/Desktop/wealth-mortality-pimbwe')
 ```
 
-if the folder containing the project is named 'wealth-survival' and on your Desktop. You can tell if you are in the right place by typing in `dir()` and seeing the folders 'code' and 'inputs' and this readme.txt file. The analysis takes as input one files:
+if the folder containing the project is named 'wealth-mortality-pimbwe' and on your Desktop. You can tell if you are in the right place by typing in `dir()` and seeing the folders 'code' and 'inputs' and this readme.txt file. The analysis takes as input one file:
 
 - 'original_data.csv' - child survival outcome table from the Tanzanian Pimbwe
 
