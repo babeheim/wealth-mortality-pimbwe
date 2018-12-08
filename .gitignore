@@ -37,7 +37,8 @@
 ehthumbs.db
 Thumbs.db
 
-/fit_models/*
-/impute_data/*
-/data/*
 /output/*
+/1_impute_data/inputs/*
+/1_impute_data/output/*
+/2_fit_models/inputs/*
+/2_fit_models/output/*

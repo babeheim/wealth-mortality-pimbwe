@@ -1,10 +1,13 @@
 
 
-rm(list = ls())
-
-source('./code/project_functions.r')
+if (scaffold) {
+  rm(list = ls())
+  source("../project_support.r")
+}
 
 dir_init('./temp')
+
+print(paste0(Sys.time(), " - imputing missing data"))
 
 surv.data <- read.csv('./inputs/original_data.csv', stringsAsFactors=FALSE)
 
@@ -75,7 +78,6 @@ output.i = data.frame(code, Parentcode, Time, status, survey_year, Sex, Bpar,
 	Fwitch, Pwitch, time_sv, fa_eth_cat, mo_eth_cat, mo_cm_mean, WAZ, Mres4, Fres4)
 
 ## Multiple Imputation using mice()
-library(mice)
 md.pattern(output.i)
 md.pairs(output.i)
 
@@ -137,27 +139,12 @@ mice.imp.2 = clean.data(mice.imp.2.raw)
 mice.imp.3.raw = data.frame(complete(imp,3))
 mice.imp.3 = clean.data(mice.imp.3.raw)
 
-## cleanup diagnostics
-#data.frame(mice.imp.1.raw$code, mice.imp.1.raw$Sex, mice.imp.1$Sex)
-#data.frame(mice.imp.1.raw$code, mice.imp.1.raw$Bpar, mice.imp.1$Bpar)
-#data.frame(mice.imp.1.raw$code, mice.imp.1.raw$Med2, mice.imp.1$Med2)
-#data.frame(mice.imp.1.raw$code, mice.imp.1.raw$Fed2, mice.imp.1$Fed2)
-#data.frame(mice.imp.1.raw$code, mice.imp.1.raw$Mrels, mice.imp.1$Mrels)
-#data.frame(mice.imp.1.raw$code, mice.imp.1.raw$Frels, mice.imp.1$Frels)
-#data.frame(mice.imp.1.raw$code, mice.imp.1.raw$Ktsh, mice.imp.1$Ktsh)
-#data.frame(mice.imp.1.raw$code, mice.imp.1.raw$Jzero, mice.imp.1$Jzero)
-#data.frame(mice.imp.1.raw$code, mice.imp.1.raw$Hqual, mice.imp.1$Hqual)
-#data.frame(mice.imp.1.raw$code, mice.imp.1.raw$Mres, mice.imp.1$Mres)
-#data.frame(mice.imp.1.raw$code, mice.imp.1.raw$Fres, mice.imp.1$Fres)
-
-write.csv(mice.imp.1, file = './temp/imp1.csv', row.names = TRUE)
-write.csv(mice.imp.2, file = './temp/imp2.csv', row.names = TRUE)
-write.csv(mice.imp.3, file = './temp/imp3.csv', row.names = TRUE)
+write.csv(mice.imp.1, file = './temp/imputed_data_1.csv', row.names = TRUE)
+write.csv(mice.imp.2, file = './temp/imputed_data_2.csv', row.names = TRUE)
+write.csv(mice.imp.3, file = './temp/imputed_data_3.csv', row.names = TRUE)
 
 dir_init('./output')
 files <- list.files('./temp', full.names=TRUE)
 file.copy(files, './output')
 
 if(!save_temp) unlink('./temp', recursive=TRUE)
-
-print(paste0(Sys.time(), " - imputation complete"))
